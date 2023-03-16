@@ -25,13 +25,13 @@ struct Queue<T> {
     if isEmpty {
       return nil
     }
-    return output.isEmpty ? input.first : output.last
+    return output.isEmpty ? input.first! : output.last!
   }
   
   var last: T? {
     if isEmpty {
       return nil
     }
-    return input.isEmpty ? output.first : input.last
+    return input.isEmpty ? output.first! : input.last!
   }
 }
