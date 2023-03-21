@@ -9,16 +9,16 @@ struct Queue<T> {
       return input.count + output.count
   }
   
-  mutating func enqueue(element: T) {
+  mutating func enqueue(_ element: T) {
       input.append(element)
   }
   
-  mutating func dequeue() -> T {
+  mutating func dequeue() -> T? {
     if output.isEmpty {
         output = input.reversed() //output에 reverse한 배열 넣고 input 비우기
         input.removeAll()
     }
-    return output.removeLast()
+    return output.popLast()
   }
 
   var first: T? {
