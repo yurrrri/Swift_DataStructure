@@ -39,7 +39,7 @@ struct Heap<T: Comparable> { //Comparable : 비교 연산을 위한 프로토콜
     }
     heap.append(node) // 1. 일단 넣음(데이터 비교와는 상관없이)
 
-    func isMoveUp(_ insertIndex: Int) -> Bool { // 2. 자기보다 작은 부모 노드의 인덱스를 찾는 과정
+    func isMoveUp(_ insertIndex: Int) -> Bool { // 2. 자기보다 큰 부모 노드를 찾아 바꾸기 위함
       if insertIndex <= 1 {  // 루트 노드일 때 -> 찾는 부모 노드가 없음
           return false
       }
@@ -48,7 +48,7 @@ struct Heap<T: Comparable> { //Comparable : 비교 연산을 위한 프로토콜
     }
     
     var insertIndex = heap.count - 1
-    while isMoveUp(insertIndex) { //2. 자기 자리를 찾아갈때까지 위로 감 (나보다 작은 부모노드를 찾을때까지)
+    while isMoveUp(insertIndex) { //2. 자기 자리를 찾아갈때까지 위로 감 (나보다 큰 부모노드를 그만 만날때까지 swap하면서 올라감)
         let parentIndex = insertIndex / 2
         heap.swapAt(insertIndex, parentIndex)
         insertIndex = parentIndex
