@@ -1,37 +1,37 @@
 struct Queue<T> {
-  var input = [T]()
-  var output = [T]()
+  var instack = [T]() //enqueue 담당 스택
+  var outstack = [T]() //dequeue 담당 스택
   
   var isEmpty : Bool {
-      return input.isEmpty && output.isEmpty
+      return instack.isEmpty && outstack.isEmpty
   }
   var size: Int {
-      return input.count + output.count
+      return instack.count + outstack.count
   }
   
   mutating func enqueue(_ element: T) {
-      input.append(element)
+      instack.append(element)
   }
   
   mutating func dequeue() -> T? {
-    if output.isEmpty {
-        output = input.reversed() //output에 reverse한 배열 넣고 input 비우기
-        input.removeAll()
+    if outstack.isEmpty {
+        outstack = instack.reversed() //outstack reverse한 배열 넣고 input 비우기
+        instack.removeAll()
     }
-    return output.popLast()
+    return outstack.popLast()
   }
 
   var first: T? {
     if isEmpty {
       return nil
     }
-    return output.isEmpty ? input.first! : output.last!
+    return outstack.isEmpty ? instack.first! : outstack.last!
   }
   
   var last: T? {
     if isEmpty {
       return nil
     }
-    return input.isEmpty ? output.first! : input.last!
+    return instack.isEmpty ? outstack.first! : instack.last!
   }
 }
